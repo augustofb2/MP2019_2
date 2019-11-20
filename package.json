@@ -2,6 +2,8 @@
   "name": "projeto_final",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/augustofb2/MP2019_2.git",
+  "author": "Augusto Freitas <augustofb2@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^6.6.0",
