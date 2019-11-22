@@ -1,4 +1,4 @@
-class aluno {
+class Aluno {
   constructor(inicial) {
     this.nome = inicial.nome;
     this.semestre = inicial.semestre;
@@ -10,8 +10,9 @@ class aluno {
     this.cansaço = inicial.cansaço;
     this.estagiando = inicial.estagiando;
     this.experiencia = inicial.experiencia;
+    this.aprovadas = inicial.aprovadas;
   }
 }
 
 
-export default aluno;
+export default Aluno;
