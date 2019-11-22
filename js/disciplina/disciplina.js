@@ -1,4 +1,4 @@
-class disciplina {
+class Disciplina {
   constructor(inicial) {
   	this.nome = inicial.nome;
     this.creditos = inicial.creditos;
@@ -12,4 +12,4 @@ class disciplina {
   }
 }
 
-export default disciplina;
+export default Disciplina;
