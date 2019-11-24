@@ -12,7 +12,42 @@ class Aluno {
     this.experiencia = inicial.experiencia;
     this.aprovadas = inicial.aprovadas;
   }
-}
 
+  dormir(horas) {
+    if(horas >= 8) {
+        this.sono = 0;
+        this.cansaço = 0;
+    } else {
+        this.sono = this.sono - (horas * horas * 1.6);
+        // TODO
+    }
+  }
+
+  lazer(horas) {
+    this.estresse = this.estresse - (horas * 10);
+  }
+
+  estudar(disciplina, horas) {
+    disciplina.estudo++;
+
+    if(disciplina.creditos === 2) {
+        disciplina.desempenho = disciplina.desempenho + (1.35 * this.desempenho * horas * disciplina.estudo/10);
+    } else if(disciplina.creditos === 4) {
+        disciplina.desempenho = disciplina.desempenho + (2.7 * this.desempenho * horas * disciplina.estudo/10);
+    } else if(disciplina.creditos === 6) {
+        disciplina.desempenho = disciplina.desempenho + (3.9 * this.desempenho * horas * disciplina.estudo/10);
+    } else if(disciplina.creditos === 7){
+        disciplina.desempenho = disciplina.desempenho + (4.725 * this.desempenho * horas * disciplina.estudo/10);
+    }
+  }
+
+  updateDesempenho() {
+    this.desempenho = 1 - (this.estresse + this.cansaço)/2;
+  }
+
+  updateCansaco() {
+    // TODO
+  }
+}
 
 export default Aluno;
