@@ -21,9 +21,12 @@ class Aluno {
 
   escolherDisciplinas(disciplinas) {
     const aprovadas = this.aprovadas.map((a) => a.nome);
+    const reprovadas = this.disciplinas.map((a) => a.nome);
 
     disciplinas.forEach((disciplina) => {
-      if (this.semestre >= disciplina.semestre && !aprovadas.includes(disciplina.nome)) {
+      if (this.semestre >= disciplina.semestre
+         && !aprovadas.includes(disciplina.nome)
+         && !reprovadas.includes(disciplina.nome)) {
         this.adicionarDisciplina(disciplina);
       }
     });
@@ -49,12 +52,12 @@ class Aluno {
   }
 
   dormir(horas) {
-    if(horas >= 8) {
-        this.sono = 0;
-        this.cansaço = 0;
+    if (horas >= 8) {
+      this.sono = 0;
+      this.cansaço = 0;
     } else {
-        this.sono = this.sono - (horas * horas * 1.6);
-        // TODO
+      this.sono = this.sono - (horas * horas * 1.6);
+      // TODO
     }
   }
 
@@ -62,27 +65,18 @@ class Aluno {
     this.estresse = this.estresse - (horas * 10);
   }
 
-  estudar(disciplina, horas) {
-    disciplina.estudo++;
-
-    if(disciplina.creditos === 2) {
-        disciplina.desempenho = disciplina.desempenho + (1.35 * this.desempenho * horas * disciplina.estudo/10);
-    } else if(disciplina.creditos === 4) {
-        disciplina.desempenho = disciplina.desempenho + (2.7 * this.desempenho * horas * disciplina.estudo/10);
-    } else if(disciplina.creditos === 6) {
-        disciplina.desempenho = disciplina.desempenho + (3.9 * this.desempenho * horas * disciplina.estudo/10);
-    } else if(disciplina.creditos === 7){
-        disciplina.desempenho = disciplina.desempenho + (4.725 * this.desempenho * horas * disciplina.estudo/10);
-    }
-  }
-
   updateDesempenho() {
-    this.desempenho = 1 - (this.estresse + this.cansaço)/2;
+    this.desempenho = 1 - (this.estresse + this.cansaço) / 2;
   }
 
-  updateCansaco() {
-    // TODO
+  estudar(nome, horas) {
+    this.disciplinas.forEach((item) => {
+      if (item.nome === nome) { item.estudar(horas); }
+    });
   }
+  // updateCansaco() {
+  //   // TODO
+  // }
 }
 
 export default Aluno;
