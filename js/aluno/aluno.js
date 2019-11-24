@@ -13,6 +13,39 @@ class Aluno {
     this.aprovadas = inicial.aprovadas;
   }
 
+  setNome(nome) {
+    this.nome = nome;
+  }
+
+  escolherDisciplinas(disciplinas) {
+    const aprovadas = this.aprovadas.map((a) => a.nome);
+
+    disciplinas.forEach((disciplina) => {
+      if (this.semestre >= disciplina.semestre && !aprovadas.includes(disciplina.nome)) {
+        this.adicionarDisciplina(disciplina);
+      }
+    });
+  }
+
+  adicionarDisciplina(disciplina) {
+    this.disciplinas.push(disciplina);
+  }
+
+  processarDisciplinas() {
+    const reprovadas = [];
+    const aprovadas = [];
+
+    this.disciplinas.forEach((item) => {
+      if (item.reprovado) {
+        reprovadas.push(item);
+      } else {
+        aprovadas.push(item);
+      }
+    });
+    this.disciplinas = reprovadas;
+    this.aprovadas = aprovadas;
+  }
+
   dormir(horas) {
     if(horas >= 8) {
         this.sono = 0;
