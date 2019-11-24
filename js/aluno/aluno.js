@@ -1,3 +1,5 @@
+import Disciplina from '../disciplina/disciplina';
+
 class Aluno {
   constructor(inicial) {
     this.nome = inicial.nome;
@@ -28,7 +30,7 @@ class Aluno {
   }
 
   adicionarDisciplina(disciplina) {
-    this.disciplinas.push(disciplina);
+    this.disciplinas.push(new Disciplina(disciplina));
   }
 
   processarDisciplinas() {
