@@ -3,6 +3,22 @@ import disciplinas from '../objetos/disciplinas';
 import Aluno from './aluno';
 import Disciplina from '../disciplina/disciplina';
 
+const gerarAluno = () => (
+  {
+    nome: 'teste',
+    semestre: 1,
+    disciplinas: [],
+    dinheiro: 0,
+    sono: 0,
+    lazer: 0,
+    estresse: 0,
+    cansaço: 0,
+    estagiando: false,
+    experiencia: 0,
+    aprovadas: [],
+  }
+);
+
 const disciplinaTeste = new Disciplina({
   nome: 'ALGORITMOS E PROGRAMACAO DE COMPUTADORES',
   creditos: 6,
@@ -18,19 +34,7 @@ const disciplinaTeste = new Disciplina({
 const disciplinasTeste = disciplinas.map((item) => new Disciplina(item));
 
 it('Construtor de aluno', () => {
-  const alunoTeste = {
-    nome: 'teste',
-    semestre: 1,
-    disciplinas: [],
-    dinheiro: 0,
-    sono: 0,
-    lazer: 0,
-    estresse: 0,
-    cansaço: 0,
-    estagiando: false,
-    experiencia: 0,
-    aprovadas: [],
-  };
+  const alunoTeste = gerarAluno();
   const aluno = new Aluno(alunoTeste);
   expect(aluno.nome).toBe(alunoTeste.nome);
   expect(aluno.semestre).toBe(alunoTeste.semestre);
@@ -43,38 +47,13 @@ it('Construtor de aluno', () => {
 });
 
 it('Adicionar disciplina', () => {
-  const alunoTeste = {
-    nome: 'teste',
-    semestre: 1,
-    disciplinas: [],
-    dinheiro: 0,
-    sono: 0,
-    lazer: 0,
-    estresse: 0,
-    cansaço: 0,
-    estagiando: false,
-    experiencia: 0,
-    aprovadas: [],
-  };
-  const aluno = new Aluno(alunoTeste);
+  const aluno = new Aluno(gerarAluno());
   aluno.adicionarDisciplina(disciplinaTeste);
   expect(aluno.disciplinas).toStrictEqual([disciplinaTeste]);
 });
 
 it('Escolher disciplinas do semestre', () => {
-  const alunoTeste = {
-    nome: 'teste',
-    semestre: 1,
-    disciplinas: [],
-    dinheiro: 0,
-    sono: 0,
-    lazer: 0,
-    estresse: 0,
-    cansaço: 0,
-    estagiando: false,
-    experiencia: 0,
-    aprovadas: [],
-  };
+  const alunoTeste = gerarAluno();
   // eslint-disable-next-line max-len
   const disciplinasValidas = disciplinasTeste.filter((item) => item.semestre <= alunoTeste.semestre);
   const aluno = new Aluno(alunoTeste);
@@ -83,20 +62,8 @@ it('Escolher disciplinas do semestre', () => {
 });
 
 it('Processar disciplinas aprovadas e reprovadas', () => {
-  const alunoTeste = {
-    nome: 'teste',
-    semestre: 1,
-    disciplinas: [],
-    dinheiro: 0,
-    sono: 0,
-    lazer: 0,
-    estresse: 0,
-    cansaço: 0,
-    estagiando: false,
-    experiencia: 0,
-    aprovadas: [],
-  };
-  const aluno = new Aluno(alunoTeste);
+  // const alunoTeste = gerarAluno();
+  const aluno = new Aluno(gerarAluno());
   aluno.escolherDisciplinas(disciplinas);
   const disciplinasAprovadas = aluno.disciplinas.filter((item) => !item.reprovado);
   const disciplinasReprovadas = aluno.disciplinas.filter((item) => item.reprovado);

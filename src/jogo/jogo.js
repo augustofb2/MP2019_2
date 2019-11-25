@@ -1,0 +1,68 @@
+import Aluno from '../aluno/aluno';
+import Disciplina from '../disciplina/disciplina';
+import Estagio from '../estagio/estagio';
+
+class Jogo {
+  constructor(inicial) {
+    this.tempo = inicial.jogo.tempo;
+    this.hora = inicial.jogo.hora;
+    this.diaSemana = inicial.jogo.diaSemana;
+    this.semana = inicial.jogo.senana;
+    this.periodo = inicial.jogo.periodo;
+    this.disciplinas = inicial.disciplinas.map((disciplina) => new Disciplina(disciplina));
+    this.estagios = inicial.estagios.map((estagio) => new Estagio(estagio));
+
+    this.aluno = new Aluno(inicial.aluno);
+  }
+
+  iniciarSemestre() {
+    this.tempo = 0;
+    this.semestre += 1;
+    this.aluno.escolherDisciplinas(this.disciplinas);
+  }
+
+  verificarFimSemesre() {
+    if (this.tempo > 2688) {
+      this.terminarSemestre();
+    }
+  }
+
+  terminarSemestre() {
+    this.aluno.processarDisciplinas();
+  }
+
+  getTempoObrigacoes() {
+    return Math.ceil(2 + this.aluno.getCreditos() / 5 + this.aluno.getHorasEstagio());
+  }
+
+  avancarTempo(horas) {
+    this.tempo += horas;
+    this.hora += horas;
+    if (this.hora >= 24) {
+      this.diaSemana += 1;
+      this.hora -= 24;
+      if (this.diaSemana >= 7) {
+        this.semana += 1;
+        this.diaSemana -= 7;
+      }
+    }
+    if (this.hora === 7 && this.diaSemana < 5) {
+      this.cumprirObrigacoes();
+    }
+    this.verificarFimSemesre();
+  }
+
+  calcularTempoDisponivel() {
+    if (this.hora > 7) {
+      return 24 + 7 - this.hora;
+    }
+    return 7 - this.hora;
+  }
+
+  cumprirObrigacoes() {
+    this.hora += this.getTempoObrigacoes();
+  }
+
+}
+
+export default Jogo;

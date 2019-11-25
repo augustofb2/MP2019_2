@@ -4,7 +4,7 @@ class Aluno {
   constructor(inicial) {
     this.nome = inicial.nome;
     this.semestre = inicial.semestre;
-    this.disciplinas = inicial.disciplinas;
+    this.disciplinas = inicial.disciplinas.map((item) => new Disciplina(item));
     this.dinheiro = inicial.dinheiro;
     this.sono = inicial.sono;
     this.lazer = inicial.lazer;
@@ -74,9 +74,30 @@ class Aluno {
       if (item.nome === nome) { item.estudar(horas); }
     });
   }
+
   // updateCansaco() {
   //   // TODO
   // }
+  gerarNotas() {
+    this.disciplinas.forEach((item) => {
+      item.gerarNota();
+    });
+  }
+
+  avaliarDisciplinas() {
+    this.disciplinas.forEach((item) => {
+      item.avaliar();
+    });
+  }
+
+  getCreditos() {
+    return this.disciplinas.map((item) => item.creditos).reduce((total, num) => total + num);
+  }
+
+  getHorasEstagio() {
+    return this.estagio.horas;
+  }
 }
+
 
 export default Aluno;
