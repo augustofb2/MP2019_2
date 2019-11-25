@@ -13,6 +13,7 @@ class Aluno {
     this.estagio = inicial.estagio;
     this.experiencia = inicial.experiencia;
     this.aprovadas = inicial.aprovadas;
+    this.creditos = inicial.creditos;
   }
 
   setNome(nome) {
@@ -65,9 +66,9 @@ class Aluno {
     this.estresse = this.estresse - (horas * 10);
   }
 
-  updateDesempenho() {
-    this.desempenho = 1 - (this.estresse + this.cansaço) / 2;
-  }
+  // updateDesempenho() {
+  //   this.desempenho = 100 - (this.estresse + this.cansaço) / 2;
+  // }
 
   estudar(nome, horas) {
     this.disciplinas.forEach((item) => {
@@ -96,6 +97,14 @@ class Aluno {
 
   getHorasEstagio() {
     return this.estagio.horas;
+  }
+
+  atualizarCreditos() {
+    this.creditos = this.aprovadas.map((item) => item.creditos).reduce((total, num) => total + num);
+  }
+
+  avancarSemestre() {
+    this.semestre += 1;
   }
 }
 

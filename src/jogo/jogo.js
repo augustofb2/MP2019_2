@@ -16,9 +16,11 @@ class Jogo {
   }
 
   iniciarSemestre() {
-    this.tempo = 0;
-    this.semestre += 1;
+    this.aluno.avancarSemestre();
     this.aluno.escolherDisciplinas(this.disciplinas);
+    this.tempo = 0;
+    this.hora = 7;
+    this.diaSemana = 0;
   }
 
   verificarFimSemesre() {
@@ -28,7 +30,9 @@ class Jogo {
   }
 
   terminarSemestre() {
+    this.aluno.gerarNotas();
     this.aluno.processarDisciplinas();
+    this.aluno.atualizarCreditos();
   }
 
   getTempoObrigacoes() {
@@ -62,7 +66,6 @@ class Jogo {
   cumprirObrigacoes() {
     this.hora += this.getTempoObrigacoes();
   }
-
 }
 
 export default Jogo;
