@@ -10,7 +10,7 @@ class Aluno {
     this.lazer = inicial.lazer;
     this.estresse = inicial.estresse;
     this.cansaço = inicial.cansaço;
-    this.estagiando = inicial.estagiando;
+    this.estagio = inicial.estagio;
     this.experiencia = inicial.experiencia;
     this.aprovadas = inicial.aprovadas;
   }
