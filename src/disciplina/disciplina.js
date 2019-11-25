@@ -19,18 +19,18 @@ class Disciplina {
     this.nota = this.desempenho;
   }
 
-  estudar(horas) {
+  estudar(horas, lazer) {
     this.estudo += 1;
     if (this.desempenho === 0) { this.desempenho = 1; }
 
     if (this.creditos === 2) {
-      this.desempenho += ((4.725 * this.desempenho * horas * this.estudo) / 10);
+      this.desempenho += Math.round((4.725 * this.desempenho * horas * this.estudo + lazer));
     } else if (this.creditos === 4) {
-      this.desempenho += ((3.9 * this.desempenho * horas * this.estudo) / 10);
+      this.desempenho += Math.round((3.9 * this.desempenho * horas * this.estudo + lazer) / 10);
     } else if (this.creditos === 6) {
-      this.desempenho += ((2.7 * this.desempenho * horas * this.estudo) / 10);
+      this.desempenho += Math.round((2.7 * this.desempenho * horas * this.estudo + lazer) / 10);
     } else if (this.creditos === 7) {
-      this.desempenho += ((1.35 * this.desempenho * horas * this.estudo) / 10);
+      this.desempenho += Math.round((1.35 * this.desempenho * horas * this.estudo + lazer) / 10);
     }
   }
 }

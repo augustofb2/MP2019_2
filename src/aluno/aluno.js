@@ -9,7 +9,7 @@ class Aluno {
     this.sono = inicial.sono;
     this.lazer = inicial.lazer;
     this.estresse = inicial.estresse;
-    this.cansaço = inicial.cansaço;
+    this.cansaco = inicial.cansaco;
     this.estagio = inicial.estagio;
     this.experiencia = inicial.experiencia;
     this.aprovadas = inicial.aprovadas;
@@ -55,30 +55,34 @@ class Aluno {
   dormir(horas) {
     if (horas >= 8) {
       this.sono = 0;
-      this.cansaço = 0;
+      this.cansaco = 0;
     } else {
       this.sono = this.sono - (horas * horas * 1.6);
-      // TODO
+      this.cansaco = this.cansaco - (horas * horas * 1.6);
     }
+    if (this.sono < 0) { this.sono = 0; }
+    if (this.cansaco < 0) { this.cansaco = 0; }
   }
 
   lazer(horas) {
     this.estresse = this.estresse - (horas * 10);
+    if (this.estresse < 0) { this.estresse = 0; }
+    this.cansaco = this.cansaco - (horas * 5);
+    if (this.cansaco < 0) { this.cansaco = 0; }
   }
-
-  // updateDesempenho() {
-  //   this.desempenho = 100 - (this.estresse + this.cansaço) / 2;
-  // }
 
   estudar(nome, horas) {
     this.disciplinas.forEach((item) => {
-      if (item.nome === nome) { item.estudar(horas); }
+      if (item.nome === nome) { item.estudar(horas, this.lazer); }
     });
+    this.estresse += horas * 3;
+    if (this.estresse > 100) { this.estresse = 100; }
+    this.cansaco += horas * 3;
+    if (this.cansaco < 100) { this.cansaco = 100; }
+    this.lazer -= horas * 3;
+    if (this.lazer < 0) { this.lazer = 0; }
   }
 
-  // updateCansaco() {
-  //   // TODO
-  // }
   gerarNotas() {
     this.disciplinas.forEach((item) => {
       item.gerarNota();
@@ -107,6 +111,5 @@ class Aluno {
     this.semestre += 1;
   }
 }
-
 
 export default Aluno;
